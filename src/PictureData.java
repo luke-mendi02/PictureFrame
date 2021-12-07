@@ -1,16 +1,27 @@
+import java.util.ArrayList;
+
 public class PictureData {
 		private int xpos;
 		private int ypos;
 		private int radius;
+		private String imageName;
+		private String imageDate;
+		private String imageDescription;
 		public PictureData() {
 			xpos = 0;
 			ypos = 0;
 			radius = 5;
+			imageName = "";
+			imageDate = "";
+			imageDescription = "";
 		}
 		public PictureData(int x, int y, int r) {
 			setXPos(x);
 			setYPos(y);
 			setRadius(r);
+			setImageName(imageName);
+			setImageDate(imageDate);
+			setImageDescription(imageDescription);
 		}
 		public int getXPos() {
 			return xpos;
@@ -20,6 +31,15 @@ public class PictureData {
 		}
 		public int getRadius() {
 			return radius;
+		}
+		public String getImageName() {
+			return imageName;
+		}
+		public String getImageDate() {
+			return imageDate;
+		}
+		public String getImageDescription() {
+			return imageDescription;
 		}
 		public void setXPos(int x) {
 			if (x < 0) {
@@ -41,6 +61,15 @@ public class PictureData {
 			} else {
 				radius = r;
 			}
+		}
+		public void setImageName(String imageName){
+			this.imageName = imageName;
+		}
+		public void setImageDate(String imageDate){
+			this.imageDate = imageDate;
+		}
+		public void setImageDescription(String imageDescription){
+			this.imageDescription = imageDescription;
 		}
 		@Override
 		public String toString() {

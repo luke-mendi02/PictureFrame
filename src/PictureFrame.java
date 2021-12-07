@@ -13,7 +13,12 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.image.BufferedImage;
+import javax.imageio.ImageIO;
+import java.io.File;
+import java.util.ArrayList;
 public class PictureFrame extends JFrame{
+    private ArrayList<BufferedImage> imageList = new ArrayList<BufferedImage>();
     public void setupMainMenu(){
         JMenuBar mbar = new JMenuBar();
         JMenu mnuFile = new JMenu("File");
@@ -41,33 +46,27 @@ public class PictureFrame extends JFrame{
         setJMenuBar(mbar);
     }
     public void setupGUI() {
-        setTitle("Menu and Mouse Frame");
-        setBounds(100,100,500,400);
+        setTitle("Picture Frame");
+        setBounds(600,240,290,400);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         Container c = getContentPane();
         c.setLayout(new BorderLayout());
         JPanel panSouth = new JPanel();
         panSouth.setLayout(new FlowLayout());
-        JLabel labSize = new JLabel("Size");
-        JTextField txtSize = new JTextField(2);
-        JButton btnChange = new JButton("Change");
-        JRadioButton rbRed = new JRadioButton("red");
-        JRadioButton rbBlack = new JRadioButton("black");
-        ButtonGroup bgrp = new ButtonGroup();
-        bgrp.add(rbRed);
-        bgrp.add(rbBlack);
-        panSouth.add(labSize);
-        panSouth.add(txtSize);
-        panSouth.add(rbRed);
-        panSouth.add(rbBlack);
-        panSouth.add(btnChange);
+        JButton btnSave = new JButton("Save");
+        JButton btnPrevious = new JButton("Prev");
+        JButton btnNext= new JButton("Next");
+        JTextField date = new JTextField("date");
+        panSouth.add(btnPrevious);
+        panSouth.add(btnSave);
+        panSouth.add(btnNext);
         c.add(panSouth,BorderLayout.SOUTH);
         PicturePanel panCenter = new PicturePanel();
         c.add(panCenter,BorderLayout.CENTER);
-
     }
     public PictureFrame() {
         setupGUI();
+        setupMainMenu();
     }
 }
 
