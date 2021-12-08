@@ -6,20 +6,22 @@ import java.awt.event.MouseMotionListener;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.awt.image.BufferedImage;
-import javax.imageio.ImageIO;
-import java.io.File;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+
 public class PicturePanel extends JPanel implements MouseListener, MouseMotionListener{
     private String messageToShow;
     private int msgX, msgY;
     private ArrayList<PictureData> datas;
     private ArrayList<PictureData> imageData = new ArrayList<PictureData>(PictureDataReader.readPictureDataFromFile());
     private ArrayList<BufferedImage> imageList = new ArrayList<BufferedImage>(PictureLoader.loadImagesFromPictureData(imageData));
-    private BufferedImage picture = 
+    private BufferedImage picture = imageList.get(0);
+    private int currentIndex;
+    
+    //int currentIndex = JPanel.getCurrentIndex();
     public PicturePanel(){
         messageToShow = "x=0, y=0";
-        setPreferredSize(new Dimension(200,200)); /* if this were not in the center 
-        section but had to fight for space in the north or south, it would ask 
-        the layout manager to make it 200x200 if possible */
+        setPreferredSize(new Dimension(200,200)); 
         addMouseListener(this);
         msgX = 10;
         msgY = 20;
@@ -28,17 +30,25 @@ public class PicturePanel extends JPanel implements MouseListener, MouseMotionLi
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
+        try{
+            //setPicture(imageList.get(currentIndex));
+            g.drawImage(picture,0,0,null);
+            repaint();
+        } catch (Exception ex) {
+         //   System.out.println("e");
+   }
         g.drawString(messageToShow,msgX,msgY);
         for (PictureData data: datas) {
             g.fillOval(data.getXPos(), data.getYPos(), data.getRadius(), data.getRadius());
         }
-        g.drawString(messageToShow,msgX,msgY);
-        //try{
-        //    BufferedImage img = ImageIO.read(new File("pic1.png"));
-        //    g.drawImage(picture,0,0,null);
-        //} catch (Exception ex) {
-         //   System.out.println("e");
-   //}
+
+    }
+    public class nextBtnHandler implements ActionListener {
+        public void actionPerformed(ActionEvent e) {
+            currentIndex = currentIndex + 1;
+            setPicture(imageList.get(currentIndex));
+            repaint();
+        }
     }
     // for MouseListener, i need mouseClicked, mousePressed, mouseReleased, mouseEntered, mouseExited
     // for MouseMotionListener, i need mouseMoved and mouseDragged
@@ -70,7 +80,6 @@ public class PicturePanel extends JPanel implements MouseListener, MouseMotionLi
     }
     public void setPicture(BufferedImage picture){
         this.picture = picture;
-
         repaint();
     }
 

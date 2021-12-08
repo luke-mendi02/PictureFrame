@@ -7,13 +7,13 @@ public class PictureDataReader {
 		Scanner fsc = new Scanner(new File("descriptions.txt"));
 		ArrayList<PictureData> list = new ArrayList<PictureData>();
 		PictureData picture = new PictureData();
-		String line = "";
+		String line;
 		String[] parts;
-		String imageName = "";
-		String imageDate = "";
-		String imageDescription = "";
+		String imageName;
+		String imageDate;
+		String imageDescription;
 		while (fsc.hasNextLine()){
-			line = fsc.nextLine();
+			line = fsc.nextLine().trim();
 			if (line.length() > 0) {
 				parts = line.split("\t");
 				imageName = parts[0];
@@ -26,6 +26,7 @@ public class PictureDataReader {
 				list.add(picture);
 			}
 		}
+		fsc.close();
 		// System.out.print(list.get(1));
 		return list;
 	} catch (Exception ex){
