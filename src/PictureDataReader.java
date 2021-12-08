@@ -22,12 +22,12 @@ public class PictureDataReader {
 				picture.setImageName(imageName);
 				picture.setImageDate(imageDate);
 				picture.setImageDescription(imageDescription);
-				picture = new PictureData(imageName,imageDate,imageDescription);
+				picture = new PictureData(0,0,5,imageName,imageDate,imageDescription);
 				list.add(picture);
 			}
 		}
 		fsc.close();
-		// System.out.print(list.get(1));
+		 //System.out.print(list.get(0));
 		return list;
 	} catch (Exception ex){
 			return null;

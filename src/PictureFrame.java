@@ -18,12 +18,19 @@ public class PictureFrame extends JFrame{
     private ArrayList<PictureData> imageData = new ArrayList<PictureData>(PictureDataReader.readPictureDataFromFile());
     private ArrayList<BufferedImage> imageList = new ArrayList<BufferedImage>(PictureLoader.loadImagesFromPictureData(imageData));
     private int currentIndex = 0;
+    //private PicturePanel picture;
     public ArrayList<BufferedImage> getImageList() {
         return imageList;
     }
     public ArrayList<PictureData> getImageData() {
         return imageData;
     }
+    //public void setImageList(ArrayList<BufferedImage> imageList) {
+      //  this.imageList = imageList;
+    //}
+    //public void setImageData(ArrayList<PictureData> imageData) {
+      //  this.imageData = imageData;
+    //}
     public int getCurrentIndex(){
         return currentIndex;
     }
@@ -40,10 +47,11 @@ public class PictureFrame extends JFrame{
         mnuFile.add(miSave);
         miSave.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e) {
-                //ArrayList<PictureData> imageData = picture.getImageData();
+                //ArrayList<PictureData> imageData = getImageData();
                 JFileChooser jfc = new JFileChooser();
                 if (jfc.showSaveDialog(null) == JFileChooser.APPROVE_OPTION) {
-
+                    PictureDataWriter.writePictureDataToFile(getImageData(), jfc.getSelectedFile());
+                    //repaint();
                 }
             }
     });
@@ -72,10 +80,17 @@ public class PictureFrame extends JFrame{
         JPanel panSouth = new JPanel();
         JPanel subPanel = new JPanel();
         panSouth.setLayout(new BorderLayout());
-        //JTextField date = new JTextField(imageData.get(currentIndex).getImageDate());
-        //JTextArea description = new JTextArea(imageData.get(currentIndex).getImageDescription());
         JButton btnSave = new JButton("Save");
-
+        btnSave.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e) {
+                //ArrayList<PictureData> imageData = getImageData();
+                JFileChooser jfc = new JFileChooser();
+                if (jfc.showSaveDialog(null) == JFileChooser.APPROVE_OPTION) {
+                    PictureDataWriter.writePictureDataToFile(getImageData(), jfc.getSelectedFile());
+                    //repaint();
+                }
+            }
+        });
         JButton btnPrevious = new JButton("Prev");
         JButton btnNext= new JButton("Next");
         JTextField date = new JTextField();
@@ -123,7 +138,7 @@ public class PictureFrame extends JFrame{
         c.add(panSouth,BorderLayout.CENTER);
         //c.add(dateAndDescription,BorderLayout.NORTH);
         //PicturePanel picture = new PicturePanel();
-        c.add(picture,BorderLayout.NORTH);
+        //c.add(picture,BorderLayout.NORTH);
     }
     public PictureFrame() {
         setupGUI();

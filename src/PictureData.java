@@ -14,7 +14,10 @@ public class PictureData {
 			imageDate = "";
 			imageDescription = "";
 		}
-		public PictureData(String imageName, String imageDate, String imageDescription) {
+		public PictureData(int xpos, int ypos, int radius, String imageName, String imageDate, String imageDescription) {
+			setXPos(xpos);
+			setYPos(ypos);
+			setRadius(radius);
 			setImageName(imageName);
 			setImageDate(imageDate);
 			setImageDescription(imageDescription);

@@ -17,6 +17,8 @@ public class PicturePanel extends JPanel implements MouseListener, MouseMotionLi
     private ArrayList<BufferedImage> imageList = new ArrayList<BufferedImage>(PictureLoader.loadImagesFromPictureData(imageData));
     private BufferedImage picture = imageList.get(0);
     private int currentIndex;
+
+    //public Array
     
     //int currentIndex = JPanel.getCurrentIndex();
     public PicturePanel(){
@@ -58,26 +60,27 @@ public class PicturePanel extends JPanel implements MouseListener, MouseMotionLi
         msgY = e.getY();
         repaint(); // forces paintComponent to be called
     }
-    public void mousePressed(MouseEvent e){
 
-    }
-    public void mouseReleased(MouseEvent e){
-       
-    }
-    public void mouseEntered(MouseEvent e){
-
-    }
-    public void mouseExited(MouseEvent e){
+public void mousePressed(MouseEvent e){
  
-    }
-    public void mouseMoved(MouseEvent e){
-        messageToShow = String.format("Mouse moved at (%d, %d)", e.getX(),e.getY());
-        repaint();
-    }
-    public void mouseDragged(MouseEvent e){
-        messageToShow = String.format("Mouse dragged at (%d, %d)", e.getX(),e.getY());
-        repaint();
-    }
+}
+public void mouseReleased(MouseEvent e){
+
+}
+public void mouseEntered(MouseEvent e){
+
+}
+public void mouseExited(MouseEvent e){
+
+}
+public void mouseMoved(MouseEvent e){
+    messageToShow = String.format("x=%d, y=%d", e.getX(),e.getY());
+    repaint();
+}
+public void mouseDragged(MouseEvent e){
+    
+}
+
     public void setPicture(BufferedImage picture){
         this.picture = picture;
         repaint();
