@@ -6,6 +6,7 @@ public class PictureData {
 		private String imageName;
 		private String imageDate;
 		private String imageDescription;
+		// creating default constructor
 		public PictureData() {
 			xpos = 0;
 			ypos = 0;
@@ -14,6 +15,7 @@ public class PictureData {
 			imageDate = "";
 			imageDescription = "";
 		}
+		// creating non-default constructor
 		public PictureData(int xpos, int ypos, int radius, String imageName, String imageDate, String imageDescription) {
 			setXPos(xpos);
 			setYPos(ypos);
@@ -22,6 +24,7 @@ public class PictureData {
 			setImageDate(imageDate);
 			setImageDescription(imageDescription);
 		}
+		// creating getters and setters of all PictureData variables
 		public int getXPos() {
 			return xpos;
 		}
@@ -70,6 +73,7 @@ public class PictureData {
 		public void setImageDescription(String imageDescription){
 			this.imageDescription = imageDescription;
 		}
+		// creating to string function
 		@Override
 		public String toString() {
 			return String.format("%s %s %s", imageName, imageDate, imageDescription);

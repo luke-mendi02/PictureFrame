@@ -10,6 +10,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 public class PicturePanel extends JPanel implements MouseListener, MouseMotionListener{
+    // initializing variables
     private String messageToShow;
     private int msgX, msgY;
     private ArrayList<PictureData> datas;
@@ -17,10 +18,21 @@ public class PicturePanel extends JPanel implements MouseListener, MouseMotionLi
     private ArrayList<BufferedImage> imageList = new ArrayList<BufferedImage>(PictureLoader.loadImagesFromPictureData(imageData));
     private BufferedImage picture = imageList.get(0);
     private int currentIndex;
+    // creating getters and setters for variables
+    public ArrayList<BufferedImage> getImageList() {
+        return imageList;
+    }
+    public ArrayList<PictureData> getImageData() {
+        return imageData;
+    }
 
-    //public Array
-    
-    //int currentIndex = JPanel.getCurrentIndex();
+    public void setImageList(ArrayList<BufferedImage> imageList) {
+        this.imageList = imageList;
+    }
+    public void setImageData(ArrayList<PictureData> imageData) {
+        this.imageData = imageData;
+    }
+    // creating picturePanel default constructor
     public PicturePanel(){
         messageToShow = "x=0, y=0";
         setPreferredSize(new Dimension(200,200)); 
@@ -29,15 +41,15 @@ public class PicturePanel extends JPanel implements MouseListener, MouseMotionLi
         msgY = 20;
         datas = new ArrayList<PictureData>();
     }
+    // painting images and coordinates to panel
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         try{
-            //setPicture(imageList.get(currentIndex));
             g.drawImage(picture,0,0,null);
             repaint();
         } catch (Exception ex) {
-         //   System.out.println("e");
+        
    }
         g.drawString(messageToShow,msgX,msgY);
         for (PictureData data: datas) {
@@ -45,20 +57,12 @@ public class PicturePanel extends JPanel implements MouseListener, MouseMotionLi
         }
 
     }
-    public class nextBtnHandler implements ActionListener {
-        public void actionPerformed(ActionEvent e) {
-            currentIndex = currentIndex + 1;
-            setPicture(imageList.get(currentIndex));
-            repaint();
-        }
-    }
-    // for MouseListener, i need mouseClicked, mousePressed, mouseReleased, mouseEntered, mouseExited
-    // for MouseMotionListener, i need mouseMoved and mouseDragged
+    // creating mouse events
     public void mouseClicked(MouseEvent e){
         messageToShow = String.format("x=%d, y=%d", e.getX(),e.getY());
         msgX = e.getX();
         msgY = e.getY();
-        repaint(); // forces paintComponent to be called
+        repaint(); 
     }
 
 public void mousePressed(MouseEvent e){
@@ -80,11 +84,14 @@ public void mouseMoved(MouseEvent e){
 public void mouseDragged(MouseEvent e){
     
 }
-
-    public void setPicture(BufferedImage picture){
-        this.picture = picture;
-        repaint();
-    }
+/**
+ * takes in a BufferedImage Object, sets it to the picture variable, and repaints the screen to show the image
+ * @param picture BufferedImage object
+ */
+public void setPicture(BufferedImage picture){
+    this.picture = picture;
+    repaint();
+}
 
 }
 

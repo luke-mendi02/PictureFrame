@@ -6,7 +6,7 @@ public class App {
         pictureList = PictureDataReader.readPictureDataFromFile();
         // passing the pictureData object ArrayList to create BufferedImages
         PictureLoader.loadImagesFromPictureData(pictureList);
-        // creating the pictureFrame
+        // creating the pictureFrame and making it visible
         PictureFrame pf = new PictureFrame();
         pf.setVisible(true);
             
