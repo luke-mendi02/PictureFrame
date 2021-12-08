@@ -8,10 +8,13 @@ import java.util.ArrayList;
 import java.awt.image.BufferedImage;
 import javax.imageio.ImageIO;
 import java.io.File;
-public class PicturePanel extends JPanel implements MouseListener{
+public class PicturePanel extends JPanel implements MouseListener, MouseMotionListener{
     private String messageToShow;
     private int msgX, msgY;
     private ArrayList<PictureData> datas;
+    private ArrayList<PictureData> imageData = new ArrayList<PictureData>(PictureDataReader.readPictureDataFromFile());
+    private ArrayList<BufferedImage> imageList = new ArrayList<BufferedImage>(PictureLoader.loadImagesFromPictureData(imageData));
+    private BufferedImage picture = 
     public PicturePanel(){
         messageToShow = "x=0, y=0";
         setPreferredSize(new Dimension(200,200)); /* if this were not in the center 
@@ -32,7 +35,7 @@ public class PicturePanel extends JPanel implements MouseListener{
         g.drawString(messageToShow,msgX,msgY);
         //try{
         //    BufferedImage img = ImageIO.read(new File("pic1.png"));
-        //    g.drawImage(img,0,0,null);
+        //    g.drawImage(picture,0,0,null);
         //} catch (Exception ex) {
          //   System.out.println("e");
    //}
@@ -56,6 +59,19 @@ public class PicturePanel extends JPanel implements MouseListener{
     }
     public void mouseExited(MouseEvent e){
  
+    }
+    public void mouseMoved(MouseEvent e){
+        messageToShow = String.format("Mouse moved at (%d, %d)", e.getX(),e.getY());
+        repaint();
+    }
+    public void mouseDragged(MouseEvent e){
+        messageToShow = String.format("Mouse dragged at (%d, %d)", e.getX(),e.getY());
+        repaint();
+    }
+    public void setPicture(BufferedImage picture){
+        this.picture = picture;
+
+        repaint();
     }
 
 }

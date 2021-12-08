@@ -1,6 +1,7 @@
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
+import javax.swing.JTextArea;
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import java.awt.Container;
@@ -11,6 +12,7 @@ import javax.swing.JMenu;
 import javax.swing.JTextField;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import java.awt.Dimension;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.image.BufferedImage;
@@ -18,7 +20,15 @@ import javax.imageio.ImageIO;
 import java.io.File;
 import java.util.ArrayList;
 public class PictureFrame extends JFrame{
-    private ArrayList<BufferedImage> imageList = new ArrayList<BufferedImage>();
+    private ArrayList<PictureData> imageData = new ArrayList<PictureData>(PictureDataReader.readPictureDataFromFile());
+    private ArrayList<BufferedImage> imageList = new ArrayList<BufferedImage>(PictureLoader.loadImagesFromPictureData(imageData));
+    int currentIndex = 0;
+    public ArrayList<BufferedImage> getImageList() {
+        return imageList;
+    }
+    public ArrayList<PictureData> getImageData() {
+        return imageData;
+    }
     public void setupMainMenu(){
         JMenuBar mbar = new JMenuBar();
         JMenu mnuFile = new JMenu("File");
@@ -52,21 +62,29 @@ public class PictureFrame extends JFrame{
         Container c = getContentPane();
         c.setLayout(new BorderLayout());
         JPanel panSouth = new JPanel();
-        panSouth.setLayout(new FlowLayout());
+        JPanel subPanel = new JPanel();
+        panSouth.setLayout(new BorderLayout());
         JButton btnSave = new JButton("Save");
         JButton btnPrevious = new JButton("Prev");
         JButton btnNext= new JButton("Next");
-        JTextField date = new JTextField("date");
-        panSouth.add(btnPrevious);
-        panSouth.add(btnSave);
-        panSouth.add(btnNext);
-        c.add(panSouth,BorderLayout.SOUTH);
-        PicturePanel panCenter = new PicturePanel();
-        c.add(panCenter,BorderLayout.CENTER);
+        JTextField date = new JTextField(imageData.get(currentIndex).getImageDate());
+        JTextArea description = new JTextArea(imageData.get(currentIndex).getImageDescription());
+        subPanel.add(btnPrevious);
+        subPanel.add(btnSave);
+        subPanel.add(btnNext);
+        panSouth.add(date,"North");
+        panSouth.add(description,"Center");
+        panSouth.add(subPanel,"South");
+        c.add(panSouth,BorderLayout.CENTER);
+        //c.add(dateAndDescription,BorderLayout.NORTH);
+        PicturePanel picture = new PicturePanel();
+        c.add(picture,BorderLayout.NORTH);
     }
     public PictureFrame() {
         setupGUI();
         setupMainMenu();
+        getImageData();
+        getImageList();
     }
 }
 

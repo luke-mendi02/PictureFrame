@@ -15,10 +15,7 @@ public class PictureData {
 			imageDate = "";
 			imageDescription = "";
 		}
-		public PictureData(int x, int y, int r) {
-			setXPos(x);
-			setYPos(y);
-			setRadius(r);
+		public PictureData(String imageName, String imageDate, String imageDescription) {
 			setImageName(imageName);
 			setImageDate(imageDate);
 			setImageDescription(imageDescription);
@@ -73,7 +70,7 @@ public class PictureData {
 		}
 		@Override
 		public String toString() {
-			return String.format("%d %d %d", xpos, ypos, radius);
+			return String.format("%s %s %s", imageName, imageDate, imageDescription);
 		}
 	
 }
